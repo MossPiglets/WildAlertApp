@@ -11,11 +11,15 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@quasar/extras": "^1.15.5",
+    "@syncfusion/ej2-vue-maps": "^20.3.56",
     "pinia": "^2.0.23",
+    "quasar": "^2.10.2",
     "vue": "^3.2.41",
     "vue-router": "^4.1.5"
   },
   "devDependencies": {
+    "@quasar/vite-plugin": "^1.2.3",
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/jsdom": "^20.0.0",
     "@types/node": "^16.11.68",
@@ -30,6 +34,7 @@
     "naive-ui": "^2.33.5",
     "npm-run-all": "^4.1.5",
     "prettier": "^2.7.1",
+    "sass": "^1.32.12",
     "typescript": "~4.7.4",
     "vfonts": "^0.0.3",
     "vite": "^3.1.8",
