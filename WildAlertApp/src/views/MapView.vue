@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
-import { onMounted } from "vue";
+import type { Map } from "@types/leaflet";
+import { onMounted, ref } from "vue";
+import alertsService from "@/services/alertsService";
 
 onMounted(() => {
   const mapContainer = L.map("mapContainer").setView(
@@ -13,7 +15,23 @@ onMounted(() => {
     attribution:
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(mapContainer);
+  setPins(mapContainer);
 });
+
+const pins = ref([]);
+
+const setPins = (mapContainer: Map) => {
+  // call do api
+  alertsService
+    .get()
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+  const marker = L.marker([50.049683, 19.944544]).addTo(mapContainer);
+};
 </script>
 
 <template>
@@ -23,7 +41,7 @@ onMounted(() => {
     :offset="[18, 18]"
     class="map-view__sticky-button-container"
   >
-    <QBtn fab icon="add" color="accent" text-color="black"/>
+    <QBtn fab icon="add" color="accent" text-color="black" />
   </QPageSticky>
 </template>
 
