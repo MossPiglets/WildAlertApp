@@ -24,12 +24,9 @@ const lokalization = computed({
 <template>
   <QPageContainer>
     <span class="add-alert-view__text">Lokalizacja</span>
-    <QInput
-      outlined
-      v-model="lokalization"
-      dense
-      color="black"
-    />
+    <QInput outlined v-model="lokalization" dense color="black" />
+    <span>Opis</span>
+    
   </QPageContainer>
 </template>
 
