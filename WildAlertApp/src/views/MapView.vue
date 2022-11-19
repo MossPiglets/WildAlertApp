@@ -4,6 +4,7 @@ import L from "leaflet";
 import type { Map } from "@types/leaflet";
 import { onMounted, ref } from "vue";
 import alertsService from "@/services/alertsService";
+import type { AlertResponse } from "@/models/AlertResponse";
 
 onMounted(() => {
   const mapContainer = L.map("mapContainer").setView(
@@ -18,19 +19,24 @@ onMounted(() => {
   setPins(mapContainer);
 });
 
-const pins = ref([]);
-
-const setPins = (mapContainer: Map) => {
-  // call do api
-  alertsService
+const getPins = () => {
+  return alertsService
     .get()
     .then((response) => {
-      console.log(response);
+      return response.data;
     })
     .catch((error) => {
       console.error(error);
+      return [];
     });
-  const marker = L.marker([50.049683, 19.944544]).addTo(mapContainer);
+};
+
+const setPins = async (mapContainer: Map) => {
+  const pins = await getPins();
+  console.log(pins)
+  for (const pin of pins) {
+    L.marker([pin.longitude, pin.latitude]).addTo(mapContainer);
+  }
 };
 </script>
 
