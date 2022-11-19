@@ -2,7 +2,7 @@
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import type { Map } from "@types/leaflet";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, watch } from "vue";
 import alertsService from "@/services/alertsService";
 import type { AlertResponse } from "@/models/AlertResponse";
 
@@ -17,11 +17,30 @@ onMounted(() => {
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(mapContainer);
   setPins(mapContainer);
+  checkPosition();
+});
+
+const currentPosition = ref({
+  latitude: 50.049683,
+  longtitude: 19.944544,
+});
+
+const checkPosition = () => {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      currentPosition.value.latitude = position.coords.latitude;
+      currentPosition.value.longtitude = position.coords.longitude;
+    });
+  }
+};
+
+watch(checkPosition, () => {
+  getPins();
 });
 
 const getPins = () => {
   return alertsService
-    .get()
+    .get(currentPosition.value.longtitude, currentPosition.value.latitude, 15)
     .then((response) => {
       return response.data;
     })
@@ -33,9 +52,15 @@ const getPins = () => {
 
 const setPins = async (mapContainer: Map) => {
   const pins = await getPins();
-  console.log(pins)
   for (const pin of pins) {
-    L.marker([pin.longitude, pin.latitude]).addTo(mapContainer);
+    const marker = L.marker([pin.latitude, pin.longitude]).addTo(mapContainer);
+    marker.bindPopup(`<div class="map-view__container q-pa-xs">
+    <span class="map-view__title">${pin.animal}</span>
+    <span
+      >${pin.comments}</span
+    >
+    <span>${pin.latitude}, ${pin.longitude}</span>
+  </div>`).openPopup();
   }
 };
 </script>
@@ -44,7 +69,7 @@ const setPins = async (mapContainer: Map) => {
   <div id="mapContainer" class="map-view__map-container"></div>
   <QPageSticky
     position="bottom-right"
-    :offset="[36, 60]"
+    :offset="[18, 18]"
     class="map-view__sticky-button-container"
   >
     <QBtn
@@ -57,7 +82,7 @@ const setPins = async (mapContainer: Map) => {
   </QPageSticky>
 </template>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .map-view {
   &__map-container {
     height: calc(100vh - 56px);
@@ -65,6 +90,17 @@ const setPins = async (mapContainer: Map) => {
   }
   &__sticky-button-container {
     z-index: 10000;
+  }
+  &__title {
+    font-size: 1.4rem;
+  }
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    color: black;
+    max-width: 260px;
+    font-size: 1rem;
   }
 }
 </style>

@@ -2,6 +2,7 @@
 import type { AlertRequest } from "@/models/AlertRequest";
 import { Animal } from "@/models/Animal";
 import { computed, ref } from "vue";
+import alertsService from "@/services/alertsService";
 
 const alertRequest = ref<AlertRequest>({
   animal: Animal.Unknown,
@@ -20,6 +21,10 @@ const lokalization = computed({
     }
   },
 });
+const onReportButtonClick = () => {
+  console.log(alertRequest.value)
+  alertsService.post(alertRequest.value);
+};
 </script>
 
 <template>
@@ -39,7 +44,7 @@ const lokalization = computed({
       />
     </div>
 
-    <QBtn color="accent" class="full-width">Zgłoś</QBtn>
+    <QBtn color="accent" class="full-width" @click="onReportButtonClick">Zgłoś</QBtn>
   </QPageContainer>
 </template>
 

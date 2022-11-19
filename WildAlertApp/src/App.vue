@@ -1,15 +1,21 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import { useQuasar } from "quasar";
+import { useRouter } from 'vue-router';
 const $q = useQuasar();
 $q.dark.set(false);
+
+const router = useRouter()
+const onTitleCLick = () => {
+  router.push({ name: "map" });
+};
 </script>
 
 <template>
   <QLayout view="hHh lpR fFf">
     <QHeader elevated class="bg-primary text-white">
       <QToolbar>
-        <QToolbarTitle>
+        <QToolbarTitle @click="onTitleCLick">
           <img src="./assets/Logo.png" class="app__img" />
         </QToolbarTitle>
         <QSpace />
