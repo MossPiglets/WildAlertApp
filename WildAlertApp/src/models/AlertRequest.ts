@@ -1,8 +1,6 @@
 import type { Animal } from "./Animal";
 
-export type AlertResponse = {
-  id: string;
-  createdAt: string;
+export type AlertRequest = {
   longitude: number;
   latitude: number;
   comments: string;

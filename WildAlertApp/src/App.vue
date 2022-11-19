@@ -16,7 +16,7 @@ $q.dark.set(false);
       </QToolbar>
     </QHeader>
 
-    <QPageContainer class="q-pa-none">
+    <QPageContainer class="q-pa-none app__main-container">
       <RouterView />
     </QPageContainer>
   </QLayout>
@@ -27,6 +27,10 @@ $q.dark.set(false);
   &__img {
     height: 2.4rem;
     margin-top: 0.5rem;
+  }
+  &__main-container {
+    background: #f1f1f1;
+    height: 100vh;
   }
 }
 </style>

@@ -44,10 +44,16 @@ const setPins = async (mapContainer: Map) => {
   <div id="mapContainer" class="map-view__map-container"></div>
   <QPageSticky
     position="bottom-right"
-    :offset="[18, 18]"
+    :offset="[36, 60]"
     class="map-view__sticky-button-container"
   >
-    <QBtn fab icon="add" color="accent" text-color="black" />
+    <QBtn
+      fab
+      icon="add"
+      color="accent"
+      text-color="black"
+      :to="{ name: 'addAlert' }"
+    />
   </QPageSticky>
 </template>
 
