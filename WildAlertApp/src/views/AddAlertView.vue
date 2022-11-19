@@ -19,14 +19,22 @@ const lokalization = computed({
     }
   },
 });
+
 </script>
 
 <template>
   <QPageContainer>
     <span class="add-alert-view__text">Lokalizacja</span>
     <QInput outlined v-model="lokalization" dense color="black" />
-    <span>Opis</span>
-    
+    <span class="add-alert-view__text">Opis</span>
+    <QInput
+      outlined
+      v-model="alertRequest.comments"
+      clearable
+      type="textarea"
+      color="black"
+    />
+    <QBtn color="accent">Zgłoś</QBtn>
   </QPageContainer>
 </template>
 
