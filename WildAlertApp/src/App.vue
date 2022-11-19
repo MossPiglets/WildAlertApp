@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import { useQuasar } from "quasar";
 const $q = useQuasar();
 $q.dark.set(false);

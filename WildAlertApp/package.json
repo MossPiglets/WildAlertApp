@@ -13,6 +13,7 @@
   "dependencies": {
     "@quasar/extras": "^1.15.5",
     "@syncfusion/ej2-vue-maps": "^20.3.56",
+    "leaflet": "^1.9.3",
     "pinia": "^2.0.23",
     "quasar": "^2.10.2",
     "vue": "^3.2.41",
@@ -22,6 +23,7 @@
     "@quasar/vite-plugin": "^1.2.3",
     "@rushstack/eslint-patch": "^1.1.4",
     "@types/jsdom": "^20.0.0",
+    "@types/leaflet": "^1.9.0",
     "@types/node": "^16.11.68",
     "@vitejs/plugin-vue": "^3.1.2",
     "@vue/eslint-config-prettier": "^7.0.0",
