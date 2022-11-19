@@ -16,7 +16,7 @@ $q.dark.set(false);
       </QToolbar>
     </QHeader>
 
-    <QPageContainer>
+    <QPageContainer class="q-pa-none">
       <RouterView />
     </QPageContainer>
   </QLayout>
