@@ -20,7 +20,14 @@ onMounted(() => {
       '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
   }).addTo(mapContainer.value);
   mapContainer.value.on("click", onMapClick);
-  marker.value = L.marker([0, 0]).addTo(mapContainer.value);
+  var icon = L.icon({
+    iconUrl: 'src/assets/marker-icon-2x.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+  });
+  marker.value = L.marker([0, 0], { icon }).addTo(mapContainer.value);
 });
 const alertRequest = ref<AlertRequest>({
   animal: Animal.Boar,
@@ -56,14 +63,8 @@ watch(
 <template>
   <QPageContainer class="q-pa-lg add-alert-view__container">
     <div class="add-alert-view__radio-container">
-      <QRadio
-        v-model="alertRequest.animal"
-        :val="animal"
-        :label="animal.toString()"
-        v-for="(animal, index) in Animal"
-        :key="index"
-        color="accent"
-      />
+      <QRadio v-model="alertRequest.animal" :val="animal" :label="animal.toString()" v-for="(animal, index) in Animal"
+        :key="index" color="accent" />
     </div>
     <div class="add-alert-view__input-wraper">
       <span class="add-alert-view__text">Lokalizacja</span>
@@ -71,18 +72,10 @@ watch(
     </div>
     <div class="add-alert-view__input-wraper">
       <span class="add-alert-view__text">Opis</span>
-      <QInput
-        outlined
-        v-model="alertRequest.comments"
-        clearable
-        type="textarea"
-        color="black"
-      />
+      <QInput outlined v-model="alertRequest.comments" clearable type="textarea" color="black" />
     </div>
 
-    <QBtn color="accent" class="full-width" @click="onReportButtonClick"
-      >Zgłoś</QBtn
-    >
+    <QBtn color="accent" class="full-width" @click="onReportButtonClick">Zgłoś</QBtn>
   </QPageContainer>
 </template>
 
@@ -92,19 +85,23 @@ watch(
     color: black;
     font-size: 1.2rem;
   }
+
   &__container {
     display: flex;
     flex-direction: column;
     gap: 1rem;
   }
+
   &__input-wraper {
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
   }
+
   &__radio-container {
     color: black;
   }
+
   &__map-container {
     height: calc(35vh - 56px);
     width: 86vw;
