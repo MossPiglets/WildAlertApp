@@ -6,6 +6,7 @@ import { Animal } from "@/models/Animal";
 import { computed, onMounted, ref, watch } from "vue";
 import alertsService from "@/services/alertsService";
 import { useRouter } from 'vue-router';
+import markerIcon from '@/assets/marker-icon-2x.png'
 
 const router = useRouter()
 
@@ -21,7 +22,7 @@ onMounted(() => {
   }).addTo(mapContainer.value);
   mapContainer.value.on("click", onMapClick);
   var icon = L.icon({
-    iconUrl: '../assets/marker-icon-2x.png',
+    iconUrl: markerIcon,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],

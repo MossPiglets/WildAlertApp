@@ -5,6 +5,8 @@ import type { Map } from "@types/leaflet";
 import { onMounted, ref, watch } from "vue";
 import alertsService from "@/services/alertsService";
 import dayjs from 'dayjs'
+import marker from '@/assets/marker-icon-2x.png'
+
 
 onMounted(() => {
   const mapContainer = L.map("mapContainer").setView(
@@ -53,7 +55,7 @@ const getPins = () => {
 const setPins = async (mapContainer: Map) => {
   const pins = await getPins();
   var icon = L.icon({
-    iconUrl: '../assets/marker-icon-2x.png',
+    iconUrl: marker,
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
