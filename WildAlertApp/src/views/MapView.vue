@@ -53,7 +53,7 @@ const getPins = () => {
 const setPins = async (mapContainer: Map) => {
   const pins = await getPins();
   var icon = L.icon({
-    iconUrl: 'src/assets/marker-icon-2x.png',
+    iconUrl: '../assets/marker-icon-2x.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
