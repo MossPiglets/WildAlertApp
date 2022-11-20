@@ -1,7 +1,6 @@
 export enum Animal {
-  Unknown,
-  Boar,
-  Fox,
-  Deer,
-  Other,
+  Boar = "Boar",
+  Fox = "Fox",
+  Deer = "Deer",
+  Other = "Other",
 }
