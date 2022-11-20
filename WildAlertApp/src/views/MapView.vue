@@ -4,7 +4,7 @@ import L from "leaflet";
 import type { Map } from "@types/leaflet";
 import { onMounted, ref, watch } from "vue";
 import alertsService from "@/services/alertsService";
-import type { AlertResponse } from "@/models/AlertResponse";
+import dayjs from 'dayjs'
 
 onMounted(() => {
   const mapContainer = L.map("mapContainer").setView(
@@ -54,12 +54,14 @@ const setPins = async (mapContainer: Map) => {
   const pins = await getPins();
   for (const pin of pins) {
     const marker = L.marker([pin.latitude, pin.longitude]).addTo(mapContainer);
+    const creationTime = dayjs().to(dayjs(pin.createdAt));
     marker.bindPopup(`<div class="map-view__container q-pa-xs">
     <span class="map-view__title">${pin.animal}</span>
     <span
       >${pin.comments}</span
     >
     <span>${pin.latitude}, ${pin.longitude}</span>
+    <span>Zgłoszono ${creationTime}</span>
   </div>`).openPopup();
   }
 };
@@ -67,18 +69,8 @@ const setPins = async (mapContainer: Map) => {
 
 <template>
   <div id="mapContainer" class="map-view__map-container"></div>
-  <QPageSticky
-    position="bottom-right"
-    :offset="[18, 18]"
-    class="map-view__sticky-button-container"
-  >
-    <QBtn
-      fab
-      icon="add"
-      color="accent"
-      text-color="black"
-      :to="{ name: 'addAlert' }"
-    />
+  <QPageSticky position="bottom-right" :offset="[18, 18]" class="map-view__sticky-button-container">
+    <QBtn fab icon="add" color="accent" text-color="black" :to="{ name: 'addAlert' }" />
   </QPageSticky>
 </template>
 
@@ -88,12 +80,15 @@ const setPins = async (mapContainer: Map) => {
     height: calc(100vh - 56px);
     width: 100vw;
   }
+
   &__sticky-button-container {
     z-index: 10000;
   }
+
   &__title {
     font-size: 1.4rem;
   }
+
   &__container {
     display: flex;
     flex-direction: column;
