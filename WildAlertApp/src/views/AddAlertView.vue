@@ -5,6 +5,9 @@ import type { AlertRequest } from "@/models/AlertRequest";
 import { Animal } from "@/models/Animal";
 import { computed, onMounted, ref, watch } from "vue";
 import alertsService from "@/services/alertsService";
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 
 onMounted(() => {
   mapContainer.value = L.map("mapContainer").setView(
@@ -29,7 +32,7 @@ const mapContainer = ref();
 
 const onReportButtonClick = () => {
   alertsService.post(alertRequest.value);
-  alertRequest.value.comments = "";
+  router.push({ name: "map" });
 };
 
 const marker = ref();
