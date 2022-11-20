@@ -14,15 +14,20 @@ import '@quasar/extras/roboto-font/roboto-font.css'
 import '@quasar/extras/material-icons/material-icons.css'
 import '@quasar/extras/fontawesome-v6/fontawesome-v6.css'
 import 'quasar/src/css/index.sass'
-
+import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs';
+import * as pl from 'dayjs/locale/pl';
 
 const app = createApp(App);
+
+dayjs.extend(relativeTime);
+dayjs.locale(pl);
 
 app.use(createPinia());
 app.use(router);
 app.use(VueAxios, axios);
 app.use(Quasar, {
-    plugins: {},
-  })
+  plugins: {},
+})
 
 app.mount("#app");
