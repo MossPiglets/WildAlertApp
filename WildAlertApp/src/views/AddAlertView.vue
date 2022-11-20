@@ -29,6 +29,7 @@ const mapContainer = ref();
 
 const onReportButtonClick = () => {
   alertsService.post(alertRequest.value);
+  alertRequest.value.comments = "";
 };
 
 const marker = ref();
