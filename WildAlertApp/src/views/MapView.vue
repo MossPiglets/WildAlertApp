@@ -52,8 +52,16 @@ const getPins = () => {
 
 const setPins = async (mapContainer: Map) => {
   const pins = await getPins();
+  var icon = L.icon({
+    iconUrl: 'src/assets/marker-icon-2x.png',
+    iconSize: [25, 41],
+    iconAnchor: [12, 41],
+    popupAnchor: [1, -34],
+    tooltipAnchor: [16, -28],
+  });
   for (const pin of pins) {
-    const marker = L.marker([pin.latitude, pin.longitude]).addTo(mapContainer);
+
+    const marker = L.marker([pin.latitude, pin.longitude], { icon: icon }).addTo(mapContainer);
     const creationTime = dayjs().to(dayjs(pin.createdAt));
     marker.bindPopup(`<div class="map-view__container q-pa-xs">
     <span class="map-view__title">${pin.animal}</span>
